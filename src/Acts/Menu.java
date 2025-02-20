@@ -1,6 +1,7 @@
 package Acts;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -63,20 +64,36 @@ public class Menu {
 			throw new NumberFormatException("Ingrese una opcion valida");
 		}
 	}
-	
+
 	private static boolean validarPrecio(String precio) {
 		return Pattern.matches("\\d+(\\d.\\d{1,2})?", precio);
 	}
-    private static void agregarProducto() {
-        System.out.print("Ingrese el nombre del producto: ");
-        String nombre = sc.nextLine();
-        String precio;
-        do {
-            System.out.print("Ingrese el precio del producto (número con hasta 2 decimales): ");
-            precio = sc.nextLine();
-        } while (!validarPrecio(precio));
 
-        inventario.add(new Producto(nombre, Double.parseDouble(precio)));
-        System.out.println("Producto agregado exitosamente.");
-    }
+	private static void agregarProducto() {
+		System.out.print("Ingrese el nombre del producto: ");
+		String nombre = sc.nextLine();
+		String precio;
+		do {
+			System.out.print("Ingrese el precio del producto (número con hasta 2 decimales): ");
+			precio = sc.nextLine();
+		} while (!validarPrecio(precio));
+
+		inventario.add(new Producto(nombre, Double.parseDouble(precio)));
+		System.out.println("Producto agregado exitosamente.");
+	}
+
+	private static void buscarProducto() {
+		System.out.println("Ingrese el nombre del producto a encontrar");
+		String busqueda = sc.nextLine();
+
+		Iterator<Producto> iterador = inventario.iterator();
+		while (iterador.hasNext()) {
+			Producto producto = iterador.next();
+			if (producto.getNombre().equalsIgnoreCase(busqueda)) {
+				System.out.println("Producto encontrado: " + producto);
+				return;
+			}
+		}
+		System.out.println("Producto no encontrado");
+	}
 }
