@@ -20,16 +20,16 @@ public class Menu {
 					agregarProducto();
 					break;
 				case 2:
-					//buscarProdcuto();
+					buscarProdcuto();
 					break;
 				case 3:
-					//modificarProdcuto();
+					modificarProdcuto();
 					break;
 				case 4:
-					//eliminarProducto();
+					eliminarProducto();
 					break;
 				case 5:
-					//mostrarProductos();
+					mostrarProductos();
 					break;
 				case 6:
 					System.out.println("Saliendo del menu...");
