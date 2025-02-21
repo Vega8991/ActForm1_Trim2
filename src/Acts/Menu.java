@@ -5,7 +5,11 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Menu {
+public class Menu extends Producto {
+
+	public Menu(String nombre, double precio) {
+		super(nombre, precio);
+	}
 
 	private static ArrayList<Producto> inventario = new ArrayList<>();
 	private static Scanner sc = new Scanner(System.in);
@@ -21,10 +25,10 @@ public class Menu {
 					agregarProducto();
 					break;
 				case 2:
-					buscarProdcuto();
+					buscarProducto();
 					break;
 				case 3:
-					modificarProdcuto();
+					modificarProducto();
 					break;
 				case 4:
 					eliminarProducto();
@@ -43,6 +47,16 @@ public class Menu {
 				System.err.println("ERROR. Debe ingresar un numero valido");
 			}
 		} while (opcion != 6);
+	}
+
+	private static void mostrarProductos() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private static void eliminarProducto() {
+		// TODO Auto-generated method stub
+
 	}
 
 	private static void mostrarmenu() {
@@ -66,7 +80,7 @@ public class Menu {
 	}
 
 	private static boolean validarPrecio(String precio) {
-		return Pattern.matches("\\d+(\\d.\\d{1,2})?", precio);
+		return Pattern.matches("\\d+(\\.\\d{1,2})?", precio);
 	}
 
 	private static void agregarProducto() {
@@ -74,12 +88,12 @@ public class Menu {
 		String nombre = sc.nextLine();
 		String precio;
 		do {
-			System.out.print("Ingrese el precio del producto (número con hasta 2 decimales): ");
+			System.out.print("Ingrese el precio del producto (numero con hasta 2 decimales): ");
 			precio = sc.nextLine();
 		} while (!validarPrecio(precio));
 
 		inventario.add(new Producto(nombre, Double.parseDouble(precio)));
-		System.out.println("Producto agregado exitosamente.");
+		System.out.println("Producto anadido correctamente.");
 	}
 
 	private static void buscarProducto() {
@@ -96,4 +110,27 @@ public class Menu {
 		}
 		System.out.println("Producto no encontrado");
 	}
+
+	private static void modificarProducto() {
+	    System.out.println("Ingrese el nombre del producto a modificar:");
+	    String nombre = sc.nextLine();
+	    
+	    Iterator<Producto> iterador = inventario.iterator();
+	    while (iterador.hasNext()) {
+	        Producto producto = iterador.next();
+	        if (producto.getNombre().equalsIgnoreCase(nombre)) {
+	            String nuevoPrecio;
+	            do {
+	                System.out.println("Ingrese el nuevo precio (número con hasta 2 decimales):");
+	                nuevoPrecio = sc.nextLine();
+	            } while (!validarPrecio(nuevoPrecio));
+
+	            producto.setPrecio(Double.parseDouble(nuevoPrecio));
+	            System.out.println("Precio actualizado.");
+	            return;
+	        }
+	    }
+	    System.out.println("Producto no encontrado.");
+	}
 }
+

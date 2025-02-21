@@ -21,7 +21,7 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
-	public void setPrecio(int precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 
